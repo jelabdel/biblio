@@ -1,4 +1,5 @@
 import React, { Component, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { clearErrors } from '../redux/actions/errorActions';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -32,8 +33,6 @@ class SignIn extends Component {
             } else { this.setState({ msg: null }) }
         }
     }
-
-
 
 
 
@@ -76,6 +75,7 @@ class SignIn extends Component {
         return (
             <div>
                 <Form onSubmit={this.onSubmitHandle}>
+                    {this.props.isAuthenticated ? <Redirect to={"/"} /> : null}
                     {this.state.msg ? <this.AlertError /> : null}
                     <h2>Sign In</h2>
                     <Form.Group controlId="usernameFormGroup">

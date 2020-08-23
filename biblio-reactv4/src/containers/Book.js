@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import Card from 'react-bootstrap/Card';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Card, Container, Row, Col, Alert } from 'react-bootstrap';
+// import Card from 'react-bootstrap/Card';
+// import Container from 'react-bootstrap/Container';
+// import Row from 'react-bootstrap/Row';
+// import Col from 'react-bootstrap/Col';
 
 import { requestBooks } from '../redux/actions/libraryActions'
 
@@ -12,6 +13,17 @@ class Book extends Component {
 
     componentDidMount() {
         this.props.onRequestBooks()
+    }
+
+    AlertError = () => {
+        const [show, setShow] = useState(true);
+        if (show) {
+            return (
+                <Alert variant="danger" onClose={() => { setShow(false) }} dismissible>{'YOU ARE NOT SIGNED IN, PLEASE SIGN IN.'}
+                </Alert>
+            );
+        } else
+            return null;
     }
 
     render() {
@@ -40,7 +52,7 @@ class Book extends Component {
                                 </Row>
                                 : '';
                         })
-                        : <p>you are not signed in</p>
+                        : <this.AlertError />
                 }
             </Container>
         )   // closing return function
@@ -51,7 +63,6 @@ class Book extends Component {
 const mapStateToProps = state => {
     return {
         books: state.requestBooks.books,
-        isPending: state.requestBooks.isPending,
         error: state.error,
         user: state.auth.user
     }

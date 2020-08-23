@@ -16,6 +16,7 @@ class SignUp extends React.Component {
         msg: null
     };
 
+
     static propsTypes = {
         isAuthenticated: PropTypes.bool,
         error: PropTypes.object.isRequired,
@@ -34,10 +35,11 @@ class SignUp extends React.Component {
         }
     }
 
-    onChangeInput = (event) => {
 
+    onChangeInput = (event) => {
         this.setState({ [event.target.name]: event.target.value })
     }
+
 
     onSubmitHandle = (event) => {
         event.preventDefault()
@@ -51,8 +53,9 @@ class SignUp extends React.Component {
         }
         // Attempt to signup/register
         this.props.register(newUser)
-        return <Redirect to={"#"} />
+
     }
+
 
     // Show Alert with error message, when closing alert
     // dispatch  clearError action. 
@@ -60,17 +63,19 @@ class SignUp extends React.Component {
         const [show, setShow] = useState(true);
         if (show) {
             return (
-                <Alert variant="danger" onClose={() => { setShow(false); this.props.handleClearErrors() }} dismissible>{this.props.error.msg}
+                <Alert variant="danger" onClose={() => { setShow(false) }} dismissible>{this.props.error.msg}
                 </Alert>
             );
-
         } else
             return null;
     }
+
+
     render() {
         return (
             <div>
                 < Form onSubmit={this.onSubmitHandle}>
+                    {this.props.isAuthenticated ? <Redirect to={"/"} /> : null}
                     {this.state.msg ? <this.AlertError /> : null}
 
                     <h2>Sign Up</h2>
@@ -78,7 +83,6 @@ class SignUp extends React.Component {
                         <Form.Label>Name</Form.Label>
                         <Form.Control
                             name="name"
-                            // value={this.state.name}
                             onChange={this.onChangeInput}
                             type="text"
                             placeholder="Enter name" />
@@ -88,7 +92,6 @@ class SignUp extends React.Component {
                         <Form.Label>Username</Form.Label>
                         <Form.Control
                             name="username"
-                            // value={this.state.username}
                             onChange={this.onChangeInput}
                             type="text"
                             placeholder="Enter username" />
@@ -98,7 +101,6 @@ class SignUp extends React.Component {
                         <Form.Label>Email</Form.Label>
                         <Form.Control
                             name="email"
-                            // value={this.state.email}
                             onChange={this.onChangeInput}
                             type="text"
                             placeholder="Enter email" />
@@ -108,7 +110,6 @@ class SignUp extends React.Component {
                         <Form.Label>Password</Form.Label>
                         <Form.Control
                             name="password"
-                            // value={this.state.password}
                             onChange={this.onChangeInput}
                             type="password"
                             placeholder="Enter password" />
@@ -129,6 +130,7 @@ class SignUp extends React.Component {
     }
 }
 
+
 const mapDispatchToProps = (dispatch) => {
     return {
         register: (user) => dispatch(signUpUser(user)),
@@ -136,17 +138,14 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
+
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: state.auth.isAuthenticated,
         error: state.error
     }
-
 }
 
-// export default connect(
-//     mapStateToProps,
-//     { signUpUser, clearErrors }
-// )(SignUp)
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
