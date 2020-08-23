@@ -1,5 +1,6 @@
 # dependencies
-node_modules/
+biblio-react-apiv4/node_modules/
+biblio-reactv4/node_modules/
 /.pnp
 .pnp.js
 
