@@ -1,0 +1,4 @@
+{
+    "pgURI": "127.0.0.1",
+    "jwtSecret": "biblio_MyJwtSecret"
+}

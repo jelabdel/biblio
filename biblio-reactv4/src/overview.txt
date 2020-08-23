@@ -1,0 +1,20 @@
+Biblio, a personal library app
+
+To do:
+ - finish definite file structure
+ - home page should be login/signin page
+ - delete books option
+ - signup and signin - authentication
+ 
+==========================================
+V4
+
+- auth routes - V
+- JWT tokens - V
+- ** create new data base, old one is lost ** V
+- alert  when error signin/out logout - V
+- working links in navBar incl. username when logged in
+
+
+
+
