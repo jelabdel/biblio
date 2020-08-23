@@ -1,3 +1,3 @@
 # Biblio
 
-A simple 'library' app to amnage you personal library.
+A simple 'library' app to manage you personal library.
