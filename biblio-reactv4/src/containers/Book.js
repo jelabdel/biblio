@@ -2,18 +2,24 @@ import React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Card, Container, Row, Col, Alert } from 'react-bootstrap';
-// import Card from 'react-bootstrap/Card';
-// import Container from 'react-bootstrap/Container';
-// import Row from 'react-bootstrap/Row';
-// import Col from 'react-bootstrap/Col';
+
 
 import { requestBooks } from '../redux/actions/libraryActions'
 
 class Book extends Component {
 
     componentDidMount() {
+        // this.props.clearBook()
         this.props.onRequestBooks()
     }
+
+    // onSelectBook = (id) => {
+    //     return <Redirect to={`/edit/${id}`} />
+    // }
+
+
+
+
 
     AlertError = () => {
         const [show, setShow] = useState(true);
@@ -35,15 +41,14 @@ class Book extends Component {
                             return book.lang === this.props.language ?
                                 <Row key={i}>
                                     <Col lg={4} sm={6}>
-                                        <Card >
+                                        <Card  >
                                             <Card.Body>
                                                 <Card.Text >
                                                     {book.title}
                                                 </Card.Text>
                                             </Card.Body>
                                             <NavLink to={{
-                                                pathname: `/edit/${book.id}`,
-                                                bookProps: book
+                                                pathname: `/edit/${book.id}`
                                             }}>
                                                 <Card.Img variant="bottom" src={`../img/${book.image}`} />
                                             </NavLink>
@@ -70,7 +75,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onRequestBooks: () => dispatch(requestBooks())
+        onRequestBooks: () => dispatch(requestBooks()),
     }
 
 }

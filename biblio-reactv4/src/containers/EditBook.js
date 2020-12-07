@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import axios from 'axios';
+import { connect } from 'react-redux';
+import { NavLink, Redirect } from 'react-router-dom';
+import store from '../redux/store';
 import { Form, Button } from 'react-bootstrap';
+import { tokenConfig } from '../redux/actions/authActions';
+import { editBook, getSelectedBook, clearBook, deleteBook } from '../redux/actions/libraryActions'
+import { returnErrors } from '../redux/actions/errorActions';
+
 
 
 class EditBook extends Component {
@@ -18,36 +25,34 @@ class EditBook extends Component {
 
 
     componentDidMount() {
-        fetch('http://localhost:3001/')
-            .then(response => response.json())
+        axios.get(`http://localhost:3001/book/${this.state.id}`, tokenConfig(store.getState))
             .then(data => {
-                data.map((bookItem, i) => {
-                    if (bookItem.id === Number(this.props.match.params.id)) {
-                        this.setState({
-                            title: bookItem.title,
-                            author: bookItem.author,
-                            image: bookItem.image,
-                            lang: bookItem.lang,
-                            isread: bookItem.isread
-                        })
-                    }
-                    return bookItem
+                console.log('data', data)
+                this.setState({
+                    title: data.data.title,
+                    author: data.data.author,
+                    image: data.data.image,
+                    lang: data.data.lang,
+                    isread: data.data.isread
                 })
             })
+            .catch(err => {
+                returnErrors(err.response.data, err.response.status)
+            })
+
     }
 
 
     onSubmitHandle = (event) => {
         event.preventDefault()
-        fetch('http://localhost:3001/edit', {
-            method: 'PUT', // *GET, POST, PUT, DELETE, etc.
-            headers: {
-                'Content-Type': 'application/json'
-                // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
+        // edit book by dispatching editBook action
+        this.props.editBook(this.state);
+    }
 
-            body: JSON.stringify(this.state) // body data type must match "Content-Type" header
-        });
+    handleDelete = (event) => {
+        event.preventDefault()
+        this.props.deleteBook(this.state.id)
+
     }
 
     onHandleChange = (event) => {
@@ -56,52 +61,60 @@ class EditBook extends Component {
     }
 
 
-
     render() {
+        console.log('this.state.id', this.state)
+        // console.log('this.props.book.title', this.props.book.title)
         return (
             <div>EDIT
                 <Form>
                     <Form.Group controlId="formBasicText1">
                         <Form.Label>Title</Form.Label>
-                        <Form.Control name="title" onChange={this.onHandleChange} type="text" defaultValue={this.state.title} />
+                        <Form.Control name="title" onChange={this.onHandleChange} type="text" value={this.state.title} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicText2">
                         <Form.Label>Author</Form.Label>
-                        <Form.Control name="author" onChange={this.onHandleChange} type="text" defaultValue={this.state.author} />
+                        <Form.Control name="author" onChange={this.onHandleChange} type="text" value={this.state.author} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicText3">
                         <Form.Label>Image</Form.Label>
-                        <Form.Control name="image" onChange={this.onHandleChange} type="text" defaultValue={this.state.image} />
+                        <Form.Control name="image" onChange={this.onHandleChange} type="text" value={this.state.image} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicText4">
                         <Form.Label>Language</Form.Label>
-                        <Form.Control name="lang" onChange={this.onHandleChange} type="text" defaultValue={this.state.lang} />
+                        <Form.Control name="lang" onChange={this.onHandleChange} type="text" value={this.state.lang} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicText5">
                         <Form.Label>IsRead</Form.Label>
-                        <Form.Control name="isread" onChange={this.onHandleChange} type="text" defaultValue={this.state.isread} />
+                        <Form.Control name="isread" onChange={this.onHandleChange} type="text" value={this.state.isread} />
                     </Form.Group>
-
                     <Button
                         onClick={this.onSubmitHandle}
                         className="book-button"
                         variant="outline-light"
-                        type="submit">
-                        <NavLink to={`/${this.state.lang}`}>
-                            Submit
-                     </NavLink>
+                        type="submit"
+                    >
+                        Save
                     </Button>
-                    <Button 
+                    <Button
+                        onClick={this.handleDelete}
                         className="book-button"
                         variant="outline-light"
                         type="submit">
                         <NavLink to={`/${this.state.lang}`}>
-                            Cancel
-                     </NavLink>
+                            Delete
+                        </NavLink>
+                    </Button>
+                    <Button
+                        className="book-button"
+                        variant="outline-light"
+                        type="submit">
+                        <NavLink to={`/${this.state.lang}`}>
+                            To List
+                        </NavLink>
                     </Button>
                 </Form>
             </div>
@@ -110,4 +123,23 @@ class EditBook extends Component {
 }
 
 
-export default EditBook;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        editBook: (book) => dispatch(editBook(book)),
+        getBook: (id) => dispatch(getSelectedBook(id)),
+        clearBook: () => dispatch(clearBook()),
+        deleteBook: (id) => dispatch(deleteBook(id)),
+        returnErrors: (data, status) => dispatch(returnErrors(data, status))
+    }
+}
+
+
+const mapStateToProps = (state) => {
+    return {
+        book: state.getBook.book,
+        isAuthenticated: state.auth.isAuthenticated
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditBook);

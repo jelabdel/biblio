@@ -18,12 +18,10 @@ function auth(req, res, next) {
 
         // Add user from payload
         req.user = decoded;
-        console.log(req.user)
         next();
     } catch (e) {
         res.status(400).json({ msg: 'token is not valid' })
     }
-
 }
 
 module.exports = auth;

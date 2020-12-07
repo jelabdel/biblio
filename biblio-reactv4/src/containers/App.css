@@ -106,18 +106,26 @@ label.form-label{
   margin: 10px 20px;
 }
 
-.book-button:hover {
+/* .book-button:hover {
   background-color: rgb(227, 172, 106);
   border: none;
-}
+} */
 
 button.book-button {
   max-width: fit-content;
 
 }
+
+button.book-button a:hover{
+  text-decoration: none;
+}
 /* .add-book-button btn btn-outline-lightNavLink {
   text-decoration:  none;
 } */
+
+.btn-outline-light{
+  color: white;
+}
 
 .row {
   display: inline-block;
@@ -148,9 +156,19 @@ button.search-button{
   background-color: #cc8800;
 }
 
-a.navLink {
-  margin: 0.5em;
+a, a.navLink, a.navlink {
+  margin: 0.6em;
   color: black;
   text-decoration: none;
 }
 
+a:hover, a.navLink:hover, a.navlink:hover {
+  color: grey;
+}
+
+
+
+/* Addbook Container element */
+.error{
+  color: #ff1a1a;
+}

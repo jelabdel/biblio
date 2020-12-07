@@ -24,7 +24,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-
+// RETRIEVING ALL BOOKS
+// IS USED TO MAP OVER IN FRONT END
 app.get('/', auth, (req, res) => {
   return db.select('*').from('books')
     .then(books => {
@@ -35,6 +36,8 @@ app.get('/', auth, (req, res) => {
     })
 })
 
+
+// RETRIEVING ENGLISH BOOKS
 app.get('/english', auth, (req, res) => {
   return db.select('*').from('books').where('lang', '=', 'english')
     .then(books => {
@@ -42,6 +45,8 @@ app.get('/english', auth, (req, res) => {
     })
 })
 
+
+// RETRIEVING DUTCH BOOKS
 app.get('/dutch', auth, (req, res) => {
   return db.select('*').from('books').where('lang', '=', 'dutch')
     .then(books => {
@@ -49,6 +54,8 @@ app.get('/dutch', auth, (req, res) => {
     })
 })
 
+
+// ADDING BOOK
 app.post('/add', auth, (req, res) => {
   const { title, author, lang, isread, image } = req.body;
   db.insert({
@@ -61,14 +68,19 @@ app.post('/add', auth, (req, res) => {
     .into('books')
     .returning('*')
     .then(book => {
-      res.json(book[0])
-    }).then(() => console.log('book inserted'));
+      res.json(book[0]) // return the book added to db.
+    })
+    .catch(error => {
+      return res.status(401).json("error adding a book!")
+    })
 
 })
 
-app.put('/edit', auth, (req, res) => {
+
+// EDIT BOOK
+app.put('/edit/:id', auth, (req, res) => {
   const { id, title, author, lang, isread, image } = req.body;
-  db('books').where('id', '=', id)
+  db('books').where('id', '=', req.params.id)
     .update({
       title: title,
       author: author,
@@ -76,9 +88,20 @@ app.put('/edit', auth, (req, res) => {
       isread: isread,
       image: image
     })
-    .returning('title')
-    .then((title) => {
-      res.json(title)
+    .catch(error => {
+      return res.status(401).json("error updating book!")
+    })
+})
+
+
+// RETRIEVING BOOK WITH SPECIFIC ID
+app.get('/book/:id', auth, (req, res) => {
+  db('books').where('id', req.params.id)
+    .then((book) => {
+      res.json(book[0])
+    })
+    .catch(error => {
+      return res.status(401).json("error getting book!")
     })
 })
 
@@ -173,6 +196,15 @@ app.get('/user', auth, (req, res) => {
     .then(user => res.json(user[0]))
 })
 
+app.delete('/book/:id', auth, (req, res) => {
+  db('books')
+    .where('id', req.params.id)
+    .del()
+    .then(data => res.status(200).json('deleted book'))
+    .catch(err => {
+      res.status(400).json('unable to delete book') // does not work, always returning 'deleted book'
+    })
+})
 
 
 

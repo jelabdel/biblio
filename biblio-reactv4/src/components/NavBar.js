@@ -20,7 +20,7 @@ class NavBar extends Component {
             <Fragment>
                 <NavItem >
                     <span className="nav-bar mr-3">
-                        <strong> {user ? `Welcome ${user.name}` : ''}</strong>
+                        <strong> {user ? `Signed in as: ${user.name}` : ''}</strong>
                     </span>
                 </NavItem>
                 <NavLink className="navLink" onClick={this.props.signOut} to="/"> Sign Out </NavLink>
@@ -38,6 +38,9 @@ class NavBar extends Component {
             <div>
                 <Navbar fixed="top" className="nav " expand="lg">
                     <Link to="/"><Navbar.Brand>BIBLIO</Navbar.Brand></Link>
+                    <Link className="navlink" to="/add">add book</Link>
+                    <Link className="navlink" to="/dutch">dutch library</Link>
+                    <Link className="navlink" to="/english">english library</Link>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
                         {/* <Form inline>

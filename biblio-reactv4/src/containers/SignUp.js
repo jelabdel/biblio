@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-import { NavLink, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signUpUser } from '../redux/actions/authActions';
 import { clearErrors } from '../redux/actions/errorActions';
@@ -72,6 +72,7 @@ class SignUp extends React.Component {
 
 
     render() {
+        console.log(this.state)
         return (
             <div>
                 < Form onSubmit={this.onSubmitHandle}>
