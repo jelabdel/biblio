@@ -4,7 +4,8 @@ To do:
  - finish definite file structure
  - home page should be login/signin page
  - delete books option
- - signup and signin - authentication
+ - signup and signin - authentication V
+ - improve landingpage and change color palette
  
 ==========================================
 V4
@@ -17,7 +18,6 @@ V4
 - edit book link should update store directly -> not able to get this working, instead
   used local state and direct fetching the info from database. - V
 - create a delete book option - V 
-- improve landingpage and change color palette
 - after logout, still able to get to data via browser history... - V
 - make error routes, every other route should show this page. (not signed in or page not found)
   fixed by using an Alert. - V
@@ -28,10 +28,10 @@ V4
 branched to v4branch  --- To do in v4branch:
 
 - Alert(pop-up) when new book has been added
-- link a user/username when data has been changed like a book addition...
-- possibility to creacte private libraries.
+- link a user/username when data has been changed like a book addition... V
+- possibility to create private libraries.V
 - check for relative links and remove relativity of img directory.
-- add an image by selecting a file through a file api.
+- add an image by selecting a file through file selection api.
 
 
 

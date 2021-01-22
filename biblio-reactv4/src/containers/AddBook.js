@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 
 
 
+
 class AddBook extends Component {
     constructor() {
         super();
@@ -15,17 +16,23 @@ class AddBook extends Component {
             author: '',
             lang: '',
             isread: '',
-            image: ''
+            image: '',
+            username: ''
         }
+    }
+
+    componentDidMount() {
+        this.setState({
+            username: this.props.user.user.username
+        })
     }
 
     onSubmitHandle = (event) => {
         event.preventDefault()
         this.props.addBook(this.state)
-
     }
 
-    // Try to make an alert pop up whenever a new book has been added (not working yes...)
+    // Try to make an alert pop up whenever a new book has been added
     AlertMessage = () => {
         if (this.props.book) {
             let msg = 'BOOK HAS BEEN ADDED';
@@ -62,6 +69,7 @@ class AddBook extends Component {
 
 
     render() {
+        console.log('user:', this.props.user.user.username)
         return (
             <div>
                 <div>ADD BOOK</div>
@@ -128,6 +136,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: state.auth.isAuthenticated,
+        user: state.auth,
         book: state.addBook.book
     }
 }

@@ -13,7 +13,7 @@ const db = knex({
   client: 'pg',
   connection: {
     host: config.get('pgURI'),
-    database: 'biblio'
+    database: 'biblio2'
   }
 });
 
@@ -57,13 +57,14 @@ app.get('/dutch', auth, (req, res) => {
 
 // ADDING BOOK
 app.post('/add', auth, (req, res) => {
-  const { title, author, lang, isread, image } = req.body;
+  const { title, author, lang, isread, image, username } = req.body;
   db.insert({
     title: title,
     author: author,
     lang: lang,
     isread: isread,
-    image: image
+    image: image,
+    username: username
   })
     .into('books')
     .returning('*')
@@ -166,7 +167,6 @@ app.post('/signin', (req, res) => {
   db.select('email', 'hash').from('login')
     .where('email', '=', req.body.email)
     .then(data => {
-      console.log("data", data[0]);
       const isValid = bcrypt.compareSync(req.body.password, data[0].hash);
       if (isValid) {
         return db.select('*').from('users')
