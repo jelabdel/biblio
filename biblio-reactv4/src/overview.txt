@@ -1,10 +1,15 @@
-Biblio, a personal library app
+Biblio, a personal library app.
 
-To do:
+This is an outline of things need/I like to be done in the project.
+A 'V' means that implemention is finished.
+
+
+
+TO DO:
  - finish definite file structure
  - home page should be login/signin page
- - delete books option
- - signup and signin - authentication V
+ - delete books option  - V
+ - signup and signin - authentication - V
  - improve landingpage and change color palette
  
 ==========================================
@@ -32,6 +37,8 @@ branched to v4branch  --- To do in v4branch:
 - possibility to create private libraries.V
 - check for relative links and remove relativity of img directory.
 - add an image by selecting a file through file selection api.
+- Use hooks to work with state iso using class components, where ever possible.
+
 
 
 
