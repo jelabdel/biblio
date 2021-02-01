@@ -5,6 +5,7 @@ import {
     USER_LOADED,
     USER_LOADING,
     AUTH_ERROR,
+    SIGNIN_USER_PENDING,
     SIGNIN_USER_SUCCESS,
     SIGNIN_USER_FAILED,
     SIGNUP_USER_PENDING,
@@ -15,7 +16,7 @@ import {
 
 
 
-// Check token and load user
+// CHECK TOKEN AND LOAD USER
 export const loadUser = () => (dispatch, getState) => {
 
     // User loading
@@ -95,7 +96,7 @@ export const tokenConfig = getState => {
 
 // SIGNIN USER
 export const signInUser = (user) => dispatch => {
-    dispatch({ type: SIGNUP_USER_PENDING })
+    dispatch({ type: SIGNIN_USER_PENDING })
 
     // Headers
     const config = {

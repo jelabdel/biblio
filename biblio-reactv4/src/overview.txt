@@ -1,10 +1,16 @@
-Biblio, a personal library app
+Biblio, a personal library app.
 
-To do:
+This is an outline of things need/I like to be done in the project.
+A 'V' means that implemention is finished.
+
+
+
+TO DO:
  - finish definite file structure
  - home page should be login/signin page
- - delete books option
- - signup and signin - authentication
+ - delete books option  - V
+ - signup and signin - authentication - V
+ - improve landingpage and change color palette
  
 ==========================================
 V4
@@ -14,13 +20,26 @@ V4
 - ** create new data base, old one is lost ** V
 - alert  when error signin/out logout - V
 - working links in navBar incl. username when logged in - V
-- edit book link should update store directly
-- create a delete book option
-- link a user/username when data has been changed like a book addition...
-- improve landingpage and change color palette
-- after logout, still able to get to data via browser history...
+- edit book link should update store directly -> not able to get this working, instead
+  used local state and direct fetching the info from database. - V
+- create a delete book option - V 
+- after logout, still able to get to data via browser history... - V
 - make error routes, every other route should show this page. (not signed in or page not found)
+  fixed by using an Alert. - V
+
+
+=============================================
+
+branched to v4branch  --- To do in v4branch:
+
+- Alert(pop-up) when new book has been added
+- link a user/username when data has been changed like a book addition... V
+- possibility to create private libraries.V
 - check for relative links and remove relativity of img directory.
+- add an image by selecting a file through file selection api.
+- Use hooks to work with state iso using class components, where ever possible.
+
+
 
 
 

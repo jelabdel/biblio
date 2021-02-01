@@ -13,7 +13,7 @@ const db = knex({
   client: 'pg',
   connection: {
     host: config.get('pgURI'),
-    database: 'biblio'
+    database: 'biblio2'
   }
 });
 
@@ -57,13 +57,14 @@ app.get('/dutch', auth, (req, res) => {
 
 // ADDING BOOK
 app.post('/add', auth, (req, res) => {
-  const { title, author, lang, isread, image } = req.body;
+  const { title, author, lang, isread, image, username } = req.body;
   db.insert({
     title: title,
     author: author,
     lang: lang,
     isread: isread,
-    image: image
+    image: image,
+    username: username
   })
     .into('books')
     .returning('*')
@@ -106,6 +107,7 @@ app.get('/book/:id', auth, (req, res) => {
 })
 
 
+// SIGNUP
 app.post('/signup', (req, res) => {
   const { name, username, email, password } = req.body;
 
@@ -117,6 +119,7 @@ app.post('/signup', (req, res) => {
 
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(password, salt);
+
   db.transaction(trx => {
     trx.insert({
       hash: hash,
@@ -158,6 +161,8 @@ app.post('/signup', (req, res) => {
 })
 
 
+
+// SIGNIN
 app.post('/signin', (req, res) => {
   db.select('email', 'hash').from('login')
     .where('email', '=', req.body.email)
@@ -196,6 +201,8 @@ app.get('/user', auth, (req, res) => {
     .then(user => res.json(user[0]))
 })
 
+
+// DELETE BOOK
 app.delete('/book/:id', auth, (req, res) => {
   db('books')
     .where('id', req.params.id)

@@ -1,6 +1,6 @@
 # dependencies
-biblio-react-apiv4/node_modules/
-biblio-reactv4/node_modules/
+/biblio-react-apiv4/node_modules/
+/biblio-reactv4/node_modules/
 /.pnp
 .pnp.js
 
@@ -22,13 +22,13 @@ yarn-debug.log*
 yarn-error.log*
 
 # recources
-biblio-reactv4/public/img/
+/biblio-reactv4/public/img/
 
 
 
 
 # ignore folder node-modules
-node-modules/
+/node-modules/
 
 yarn-error.log
 

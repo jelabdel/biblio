@@ -43,10 +43,6 @@ class NavBar extends Component {
                     <Link className="navlink" to="/english">english library</Link>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
-                        {/* <Form inline>
-                        <FormControl  type="text" placeholder="Search" className="search-input mr-sm-2" />
-                        <Button className="search-button" variant="outline">Search</Button>
-                        </Form> */}
                         {isAuthenticated ? authLinks : guestLinks}
                     </Navbar.Collapse>
                 </Navbar>
@@ -62,9 +58,11 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
+
 const mapStateToProps = state => ({
     auth: state.auth
-    // userName: state.auth.user.username
 })
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);    // higher order component 

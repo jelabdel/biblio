@@ -4,7 +4,7 @@ import { addBook } from '../redux/actions/libraryActions';
 
 import { Form, Button, Alert } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-// import { NavLink } from 'react-router-dom';
+
 
 
 
@@ -16,8 +16,15 @@ class AddBook extends Component {
             author: '',
             lang: '',
             isread: '',
-            image: ''
+            image: '',
+            username: ''
         }
+    }
+
+    componentDidMount() {
+        this.setState({
+            username: this.props.user.user.username
+        })
     }
 
     onSubmitHandle = (event) => {
@@ -25,8 +32,23 @@ class AddBook extends Component {
         this.props.addBook(this.state)
     }
 
+    // Try to make an alert pop up whenever a new book has been added
+    AlertMessage = () => {
+        if (this.props.book) {
+            let msg = 'BOOK HAS BEEN ADDED';
+            let variantValue = "succes"
+            const [show, setShow] = useState(true);
+            if (show) {
+                return (
+                    <Alert variant={variantValue} onClose={() => { setShow(false) }} dismissible>{msg}
+                        {/* <Alert variant="danger" onClose={() => { setShow(false) }} dismissible>{'YOU ARE NOT SIGNED IN, PLEASE SIGN IN.'} */}
+                    </Alert>
+                );
+            } else return null;
+        }
+    }
+
     HandleOnChange = (event) => {
-        // console.log([event.target.name], event.target.value)
         this.setState({ [event.target.name]: event.target.value });
     }
 
@@ -35,7 +57,10 @@ class AddBook extends Component {
         const [show, setShow] = useState(true);
         if (show) {
             return (
-                <Alert variant="danger" onClose={() => { setShow(false) }} dismissible>{'YOU ARE NOT SIGNED IN, PLEASE SIGN IN.'}
+                <Alert
+                    variant="danger"
+                    onClose={() => { setShow(false) }}
+                    dismissible>{'YOU ARE NOT SIGNED IN, PLEASE SIGN IN.'}
                 </Alert>
             );
         } else
@@ -44,7 +69,7 @@ class AddBook extends Component {
 
 
     render() {
-
+        console.log('user:', this.props.user.user.username)
         return (
             <div>
                 <div>ADD BOOK</div>
@@ -95,13 +120,11 @@ class AddBook extends Component {
                         </Button>
                     </Form>
                     : <this.AlertError />}
-
-                {/* // <h4 className="error">YOU ARE NOT LOGGED IN, PLEASE LOG IN</h4> */}
             </div>
         )
     }
-
 }
+
 
 
 const mapDispatchToProps = (dispatch) => {
@@ -112,9 +135,12 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
-        isAuthenticated: state.auth.isAuthenticated
+        isAuthenticated: state.auth.isAuthenticated,
+        user: state.auth,
+        book: state.addBook.book
     }
 }
+
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddBook);

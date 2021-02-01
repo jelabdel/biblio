@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import store from '../redux/store';
 import { Form, Button } from 'react-bootstrap';
 import { tokenConfig } from '../redux/actions/authActions';
-import { editBook, getSelectedBook, clearBook, deleteBook } from '../redux/actions/libraryActions'
+import { editBook, deleteBook } from '../redux/actions/libraryActions'
 import { returnErrors } from '../redux/actions/errorActions';
 
 
@@ -39,7 +39,6 @@ class EditBook extends Component {
             .catch(err => {
                 returnErrors(err.response.data, err.response.status)
             })
-
     }
 
 
@@ -49,11 +48,12 @@ class EditBook extends Component {
         this.props.editBook(this.state);
     }
 
+
     handleDelete = (event) => {
         event.preventDefault()
         this.props.deleteBook(this.state.id)
-
     }
+
 
     onHandleChange = (event) => {
         // [e.target.name]: e.target.value
@@ -126,8 +126,6 @@ class EditBook extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         editBook: (book) => dispatch(editBook(book)),
-        getBook: (id) => dispatch(getSelectedBook(id)),
-        clearBook: () => dispatch(clearBook()),
         deleteBook: (id) => dispatch(deleteBook(id)),
         returnErrors: (data, status) => dispatch(returnErrors(data, status))
     }
@@ -136,7 +134,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
-        book: state.getBook.book,
+        book: state.editBook.book,
         isAuthenticated: state.auth.isAuthenticated
     }
 }

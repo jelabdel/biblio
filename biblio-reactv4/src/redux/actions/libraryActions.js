@@ -11,9 +11,9 @@ import {
     EDIT_BOOK_SUCCESS,
     EDIT_BOOK_FAILED,
     CLEAR_BOOK,
-    GET_SELECTED_BOOK_PENDING,
-    GET_SELECTED_BOOK_SUCCESS,
-    GET_SELECTED_BOOK_FAILED
+    // GET_SELECTED_BOOK_PENDING,
+    // GET_SELECTED_BOOK_SUCCESS,
+    // GET_SELECTED_BOOK_FAILED
 } from './types';
 import axios from 'axios';
 import { tokenConfig } from './authActions';
@@ -33,12 +33,7 @@ export const listBooks = (books, language) => {
 
 export const addBook = (book) => (dispatch, getState) => {
     dispatch({ type: ADD_BOOK_PENDING })
-    // const config = {
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //         // 'Content-Type': 'application/x-www-form-urlencoded',
-    //     }
-    // }
+
 
     axios.post('http://localhost:3001/add', book, tokenConfig(getState))
         // .then(data => console.log('data:', data))
@@ -84,19 +79,19 @@ export const deleteBook = (bookId) => (dispatch, getState) => {
 
 // getSelectedBook is not used anymore. as editing is done via local state, not by 
 // using the store's state. ** DELETE WHEN DEFINITELY NOT USED **
-export const getSelectedBook = (bookId) => (dispatch, getState) => {
-    dispatch({ type: GET_SELECTED_BOOK_PENDING })
-    // get the book
-    axios.get(`}`, tokenConfig(getState))
-        .then(data => {
-            // book is in data.data, use this as payload to send book
-            dispatch({ type: GET_SELECTED_BOOK_SUCCESS, payload: data.data })
-        })
-        .catch(err => {
-            dispatch(returnErrors(err.response.data, err.response.status))
-            dispatch({ type: GET_SELECTED_BOOK_FAILED })
-        })
-}
+// export const getSelectedBook = (bookId) => (dispatch, getState) => {
+//     dispatch({ type: GET_SELECTED_BOOK_PENDING })
+//     // get the book
+//     axios.get(`}`, tokenConfig(getState))
+//         .then(data => {
+//             // book is in data.data, use this as payload to send book
+//             dispatch({ type: GET_SELECTED_BOOK_SUCCESS, payload: data.data })
+//         })
+//         .catch(err => {
+//             dispatch(returnErrors(err.response.data, err.response.status))
+//             dispatch({ type: GET_SELECTED_BOOK_FAILED })
+//         })
+// }
 
 
 

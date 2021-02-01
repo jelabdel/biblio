@@ -19,8 +19,6 @@ class Book extends Component {
 
 
 
-
-
     AlertError = () => {
         const [show, setShow] = useState(true);
         if (show) {
@@ -38,7 +36,8 @@ class Book extends Component {
                 {
                     this.props.user && this.props.books.length !== 0 ?
                         this.props.books.data.map((book, i) => {
-                            return book.lang === this.props.language ?
+                            // list the books for the logged in user.
+                            return book.lang === this.props.language && book.username === this.props.user.username ?
                                 <Row key={i}>
                                     <Col lg={4} sm={6}>
                                         <Card  >

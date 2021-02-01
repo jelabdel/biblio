@@ -4,9 +4,6 @@ import { NavLink } from 'react-router-dom';
 
 
 class MainSection extends Component {
-
-
-
     render() {
         return (
             <div>
@@ -20,6 +17,7 @@ class MainSection extends Component {
         )
     }
 }
+
 
 
 export default MainSection;

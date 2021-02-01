@@ -21,7 +21,7 @@ export const addBook = (state = initState, action = {}) => {
 }
 
 export const deleteBook = (state = initState, action = {}) => {
-    if (action.type == actionTypes.DELETE_BOOK) {
+    if (action.type === actionTypes.DELETE_BOOK) {
         return Object.assign({}, state)
     }
 
@@ -65,31 +65,31 @@ export const editBook = (state = editBookInitState, action = {}) => {
     }
 }
 
-const getSelectedInitState = {
-    book: {},
-    isPending: false,
-    error: ''
-}
+// const getSelectedInitState = {
+//     book: {},
+//     isPending: false,
+//     error: ''
+// }
 
-// getSelectedBook is not used anymore. as editing is done via local state, not by 
-// using the store's state. ** DELETE WHEN DEFINITELY NOT USED **
-export const getSelectedBook = (state = getSelectedInitState, action = {}) => {
-    switch (action.type) {
-        case actionTypes.GET_SELECTED_BOOK_PENDING:
-            return Object.assign({}, state, { isPending: true });
-        case (actionTypes.GET_SELECTED_BOOK_SUCCESS):
-            return Object.assign({}, state, { book: action.payload, isPending: false });
-        case actionTypes.SIGNIN_USER_FAILED:
-            return Object.assign({}, state, { error: action.payload, isPending: false });
-        default:
-            return state;
-    }
-}
+// // getSelectedBook is not used anymore. as editing is done via local state, not by 
+// // using the store's state. ** DELETE WHEN DEFINITELY NOT USED **
+// export const getSelectedBook = (state = getSelectedInitState, action = {}) => {
+//     switch (action.type) {
+//         case actionTypes.GET_SELECTED_BOOK_PENDING:
+//             return Object.assign({}, state, { isPending: true });
+//         case (actionTypes.GET_SELECTED_BOOK_SUCCESS):
+//             return Object.assign({}, state, { book: action.payload, isPending: false });
+//         case actionTypes.SIGNIN_USER_FAILED:
+//             return Object.assign({}, state, { error: action.payload, isPending: false });
+//         default:
+//             return state;
+//     }
+// }
 
 
-export const clearBook = (state = getSelectedInitState, action = {}) => {
-    if (action.type === actionTypes.CLEAR_BOOK) {
-        return Object.assign({}, state, { book: {}, isPending: false, error: '' })
-    }
-    return state;
-}
+// export const clearBook = (state = getSelectedInitState, action = {}) => {
+//     if (action.type === actionTypes.CLEAR_BOOK) {
+//         return Object.assign({}, state, { book: {}, isPending: false, error: '' })
+//     }
+//     return state;
+// }

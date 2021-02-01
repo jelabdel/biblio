@@ -16,7 +16,12 @@ const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
     isLoading: false,
-    user: null
+    user: {
+        id: '',
+        name: '',
+        username: '',
+        email: ''
+    }
 }
 
 export const authReducer = (state = initialState, action) => {
