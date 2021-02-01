@@ -23,7 +23,7 @@ V4
 - edit book link should update store directly -> not able to get this working, instead
   used local state and direct fetching the info from database. - V
 - create a delete book option - V 
-- after logout, still able to get to data via browser history... - V
+- after logout, still able to get to data via browser history...fixed - V
 - make error routes, every other route should show this page. (not signed in or page not found)
   fixed by using an Alert. - V
 
