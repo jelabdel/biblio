@@ -22,30 +22,19 @@ class AddBook extends Component {
     }
 
     componentDidMount() {
-        this.setState({
-            username: this.props.user.user.username
-        })
+        {
+            if (this.props.isAuthenticated) {
+                this.setState({
+                    username: this.props.user.user.username
+                })
+            } else
+                return <this.AlertError />
+        }
     }
 
     onSubmitHandle = (event) => {
         event.preventDefault()
         this.props.addBook(this.state)
-    }
-
-    // Try to make an alert pop up whenever a new book has been added
-    AlertMessage = () => {
-        if (this.props.book) {
-            let msg = 'BOOK HAS BEEN ADDED';
-            let variantValue = "succes"
-            const [show, setShow] = useState(true);
-            if (show) {
-                return (
-                    <Alert variant={variantValue} onClose={() => { setShow(false) }} dismissible>{msg}
-                        {/* <Alert variant="danger" onClose={() => { setShow(false) }} dismissible>{'YOU ARE NOT SIGNED IN, PLEASE SIGN IN.'} */}
-                    </Alert>
-                );
-            } else return null;
-        }
     }
 
     HandleOnChange = (event) => {
@@ -69,7 +58,6 @@ class AddBook extends Component {
 
 
     render() {
-        console.log('user:', this.props.user.user.username)
         return (
             <div>
                 <div>ADD BOOK</div>
@@ -115,7 +103,7 @@ class AddBook extends Component {
                             variant="outline-light"
                             type="submit">
                             <NavLink to={`/${this.state.lang}`}>
-                                To List
+                                Back
                             </NavLink>
                         </Button>
                     </Form>

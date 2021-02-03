@@ -16,7 +16,7 @@ import SignUp from '../containers/SignUp';
 import NavBar from '../components/NavBar';
 
 import { loadUser } from '../redux/actions/authActions';
-// import { setCurrentUser } from '../redux/actions/userActions'
+
 
 import './App.css';
 
