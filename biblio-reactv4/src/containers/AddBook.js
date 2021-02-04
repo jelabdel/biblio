@@ -22,23 +22,24 @@ class AddBook extends Component {
     }
 
     componentDidMount() {
-        {
-            if (this.props.isAuthenticated) {
-                this.setState({
-                    username: this.props.user.user.username
-                })
-            } else
-                return <this.AlertError />
-        }
+        if (this.props.isAuthenticated) {
+            this.setState({
+                username: this.props.user.user.username
+            })
+        } else
+            return <this.AlertError />
     }
 
     onSubmitHandle = (event) => {
         event.preventDefault()
+        console.log("username:", this.state.username)
         this.props.addBook(this.state)
     }
 
     HandleOnChange = (event) => {
         this.setState({ [event.target.name]: event.target.value });
+
+
     }
 
 
@@ -58,9 +59,11 @@ class AddBook extends Component {
 
 
     render() {
+        console.log("isauth:", this.props.isAuthenticated)
+        console.log("username:", this.state.username)
         return (
             <div>
-                <div>ADD BOOK</div>
+                {/* <div>ADD BOOK</div> */}
                 {this.props.isAuthenticated ?
                     <Form >
                         <Form.Group controlId="formBasicText1">
@@ -69,22 +72,22 @@ class AddBook extends Component {
                         </Form.Group>
 
                         <Form.Group onChange={this.HandleOnChange} controlId="formBasicText">
-                            <Form.Label>Author</Form.Label>
+                            {/* <Form.Label>Author</Form.Label> */}
                             <Form.Control name="author" type="text" placeholder="Enter Author" />
                         </Form.Group>
 
                         <Form.Group controlId="formBasicText2">
-                            <Form.Label>Image</Form.Label>
+                            {/* <Form.Label>Image</Form.Label> */}
                             <Form.Control name="image" onChange={this.HandleOnChange} type="text" placeholder="Enter Image Name eg image.jpg" />
                         </Form.Group>
 
                         <Form.Group controlId="formBasicText3">
-                            <Form.Label>Language</Form.Label>
+                            {/* <Form.Label>Language</Form.Label> */}
                             <Form.Control name="lang" onChange={this.HandleOnChange} type="text" placeholder="Enter Language" />
                         </Form.Group>
 
                         <Form.Group controlId="formBasicText4">
-                            <Form.Label>IsRead</Form.Label>
+                            {/* <Form.Label>IsRead</Form.Label> */}
                             <Form.Control name="isread" onChange={this.HandleOnChange} type="text" placeholder="Have you read it?" />
                         </Form.Group>
 
@@ -98,7 +101,6 @@ class AddBook extends Component {
                             {/* </NavLink> */}
                         </Button>
                         <Button
-
                             className="book-button"
                             variant="outline-light"
                             type="submit">

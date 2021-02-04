@@ -27,7 +27,6 @@ class EditBook extends Component {
     componentDidMount() {
         axios.get(`http://localhost:3001/book/${this.state.id}`, tokenConfig(store.getState))
             .then(data => {
-                console.log('data', data)
                 this.setState({
                     title: data.data.title,
                     author: data.data.author,
