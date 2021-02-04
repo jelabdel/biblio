@@ -72,16 +72,15 @@ class SignUp extends React.Component {
 
 
     render() {
-        console.log(this.state)
         return (
-            <div>
+            <div className="mainsection">
                 < Form onSubmit={this.onSubmitHandle}>
                     {this.props.isAuthenticated ? <Redirect to={"/"} /> : null}
                     {this.state.msg ? <this.AlertError /> : null}
 
                     <h2>Sign Up</h2>
                     <Form.Group controlId="nameText">
-                        <Form.Label>Name</Form.Label>
+                        {/* <Form.Label>Name</Form.Label> */}
                         <Form.Control
                             name="name"
                             onChange={this.onChangeInput}
@@ -90,7 +89,7 @@ class SignUp extends React.Component {
                     </Form.Group>
 
                     <Form.Group controlId="usernameText">
-                        <Form.Label>Username</Form.Label>
+                        {/* <Form.Label>Username</Form.Label> */}
                         <Form.Control
                             name="username"
                             onChange={this.onChangeInput}
@@ -99,7 +98,7 @@ class SignUp extends React.Component {
                     </Form.Group>
 
                     <Form.Group controlId="emailText">
-                        <Form.Label>Email</Form.Label>
+                        {/* <Form.Label>Email</Form.Label> */}
                         <Form.Control
                             name="email"
                             onChange={this.onChangeInput}
@@ -108,7 +107,7 @@ class SignUp extends React.Component {
                     </Form.Group>
 
                     <Form.Group controlId="passwordText">
-                        <Form.Label>Password</Form.Label>
+                        {/* <Form.Label>Password</Form.Label> */}
                         <Form.Control
                             name="password"
                             onChange={this.onChangeInput}

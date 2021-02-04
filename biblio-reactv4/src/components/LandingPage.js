@@ -1,9 +1,14 @@
 import React from 'react';
+import SignIn from '../containers/SignIn';
 
 const LandingPage = () => {
     return (
-        <div>
-            <h1>Landing Page!</h1>
+        <div className="landingpage">
+            <div className="mainsection">
+                <h1>BIBLIO</h1>
+                <h1>manage your personal library.</h1>
+            </div>
+            <SignIn />
         </div>
     )
 }

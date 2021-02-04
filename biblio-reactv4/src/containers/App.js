@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import store from '../redux/store';
 
@@ -28,9 +28,9 @@ class App extends Component {
   render() {
 
     return (
-      <div className="App">
+      <div className="App" style={{ backgroundImage: !this.props.isAuthenticated ? `url(${'img/booksBackground.jpeg'})` : 'none' }}>
         <NavBar />
-        <h1>BIBLIO</h1>
+        {/* <h1>BIBLIO</h1> */}
         <div >
           <Switch>
             <Route exact path='/' component={Home} />
@@ -50,5 +50,10 @@ class App extends Component {
 }
 
 
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.isAuthenticated
+  }
+}
 
-export default App;
+export default connect(mapStateToProps)(App);

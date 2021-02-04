@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { clearErrors } from '../redux/actions/errorActions';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -73,13 +73,13 @@ class SignIn extends Component {
 
     render() {
         return (
-            <div>
+            <div className="mainsection">
                 <Form onSubmit={this.onSubmitHandle}>
                     {this.props.isAuthenticated ? <Redirect to={"/"} /> : null}
                     {this.state.msg ? <this.AlertError /> : null}
                     <h2>Sign In</h2>
                     <Form.Group controlId="usernameFormGroup">
-                        <Form.Label>Email</Form.Label>
+                        {/* <Form.Label>Email</Form.Label> */}
                         <Form.Control
                             name="email"
                             type="text"
@@ -89,7 +89,7 @@ class SignIn extends Component {
                     </Form.Group>
 
                     <Form.Group controlId="passwordFormGroup">
-                        <Form.Label>Password</Form.Label>
+                        {/* <Form.Label>Password</Form.Label> */}
                         <Form.Control
                             name="password"
                             type="password"
@@ -105,6 +105,7 @@ class SignIn extends Component {
                         type="submit">
                         Submit
                 </Button>
+                    <p>Not registered? Please <Link to={'/signup'}>sign up</Link>.</p>
                 </Form>
             </div>
         )

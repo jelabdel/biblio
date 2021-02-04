@@ -1,10 +1,18 @@
 body{
-  background-color: rgb(244, 183, 110);
+  
+  background-color: rgb(232, 163, 79);
   /* width: 100%; text-align: center;  */
 }
 
 .App {
   text-align: center;
+  /* background: url("/img/booksBackground.jpeg"); */
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
+  background-size: cover;
+  background-position: center;
+
 }
 
 /* Home */
@@ -26,6 +34,7 @@ a.main-section {
   text-decoration: none;
 
 }
+
 /* .add-book {
   display: block;
   width: 30%;
@@ -43,6 +52,25 @@ a.main-section {
   width: 300px;
   height: 200%;
 } */
+
+
+/* Landing Page*/
+.mainsection {
+  color: white;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+/* .landingpage {
+  background: url("/img/booksBackground.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+ 
+} */
+
+
 .book-image{
   margin:15px;
 }
@@ -85,10 +113,15 @@ p.card-text {
 
 /* AddBook */
 form{
-  border: solid white 1px;
+  /* fborder: solid white 1px; */
   width: 30%;
   margin: 30px auto;
   padding: 5px
+}
+
+/* Alert */
+div.fade.alert.alert-danger{
+  margin: 1.6rem;
 }
 
 .form-group{
@@ -139,7 +172,10 @@ button.book-button a:hover{
 .nav {
   height: 50px;
   width: 100%;
-  background-color: #e69900;
+  background-color:rgba(176, 119, 6, 0.9);
+}
+input {
+  margin: 1.5rem;
 }
 
 input.mr-sm-2.form-control {
